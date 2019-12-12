@@ -2,9 +2,9 @@ class V1::UsersController < ApplicationController
   def create
     user = User.new(user_params)
 
-    if user
+    if user.save
       token = JsonWebToken.encode({ id: user.id })
-      render json: { user: user.attributes, token: token }, status: 201
+      render :create, locals: { user: user, token: token }, status: 201
     else
       render json: { message: 'Cannot create account', errors: user.errors }, status: 422
     end
