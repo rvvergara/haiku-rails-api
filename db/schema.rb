@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_112612) do
+ActiveRecord::Schema.define(version: 2019_12_13_115029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2019_12_13_112612) do
     t.string "profilable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "profile_pic"
     t.index ["profilable_id"], name: "index_profiles_on_profilable_id"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
