@@ -5,5 +5,6 @@ class Profile < ApplicationRecord
   validates :user, presence: true
   validates :profilable, presence: true
 
-  delegate :owner, to: :user
+  delegate :first_name, to: :profilable
+  delegate :last_name, to: :profilable
 end
