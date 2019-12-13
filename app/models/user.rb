@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :role, presence: true
+
+  has_one :profile, foreign_key: :user_id, dependent: :destroy
 end

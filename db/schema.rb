@@ -10,16 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_13_091724) do
+ActiveRecord::Schema.define(version: 2019_12_13_094301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
+  create_table "practitioners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "address", default: "", null: false
+    t.text "biography", default: "", null: false
+    t.string "years_exp", default: "0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "profiles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "profilable_id", null: false
-    t.string "type"
+    t.string "profilable_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["profilable_id"], name: "index_profiles_on_profilable_id"
