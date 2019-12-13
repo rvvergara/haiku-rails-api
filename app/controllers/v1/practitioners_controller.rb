@@ -11,7 +11,7 @@ class V1::PractitionersController < ApplicationController
     practitioner = Practitioner.new(practitioner_params)
 
     if practitioner.create_profile(pundit_user)
-      render json: { profile: practitioner.attributes }, status: 201
+      render json: { profile: practitioner.attributes.merge(profile_pic: rails_blob_path(practitioner.profile_pic, only_path: true)) }, status: 201
     else
       render json: { message: 'Cannot create practitioner profile', errors: practitioner.errors }
     end

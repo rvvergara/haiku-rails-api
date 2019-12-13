@@ -3,5 +3,6 @@ Rails.application.routes.draw do
     resources :sessions, only: [:create]
     resources :users, only: [:show, :create, :update, :destroy]
     resources :practitioners
+    resources :patients
   end
 end
