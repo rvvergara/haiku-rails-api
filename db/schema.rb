@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2019_12_13_115029) do
   create_table "practitioners", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
-    t.string "address", default: "", null: false
     t.text "biography", default: "", null: false
     t.string "years_exp", default: "0", null: false
     t.datetime "created_at", null: false
