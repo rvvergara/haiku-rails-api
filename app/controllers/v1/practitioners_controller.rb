@@ -18,8 +18,8 @@ class V1::PractitionersController < ApplicationController
     authorize practitioner
     if practitioner.create_profile(pundit_user)
       render :practitioner,
-      locals: { practitioner: practitioner },
-      status: 201
+             locals: { practitioner: practitioner },
+             status: 201
     else
       process_error(practitioner, 'Cannot create practitioner profile')
     end
@@ -42,6 +42,7 @@ class V1::PractitionersController < ApplicationController
   def destroy
     practitioner = find_practitioner
     return unless practitioner
+
     authorize practitioner
     if practitioner.destroy
       action_success('Practitioner profile deleted, you need to create a new one', 202)
