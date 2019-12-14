@@ -7,6 +7,8 @@ class Practitioner < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
 
+  delegate :user, to: :profile
+  
   def create_profile(user)
     user.create_profile(profilable_type: 'Practitioner', profilable: self)
     save

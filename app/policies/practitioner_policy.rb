@@ -6,7 +6,7 @@ class PractitionerPolicy < ApplicationPolicy
   end
 
   def update?
-    @user == @record
+    @user == @record.user
   end
 
   def destroy?

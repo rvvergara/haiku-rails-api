@@ -23,7 +23,19 @@ class V1::PractitionersController < ApplicationController
     end
   end
 
-  def update; end
+  def update
+    practitioner = find_practitioner
+    return unless practitioner
+
+    authorize practitioner
+    if practitioner.update(practitioner_params)
+      render :practitioner, locals: {
+        practitioner: practitioner
+      }, status: 202
+    else
+      process_error(practitioner, 'Cannot update practitioner profile')
+    end
+  end
 
   def destroy; end
 
