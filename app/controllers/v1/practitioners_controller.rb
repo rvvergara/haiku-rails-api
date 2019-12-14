@@ -5,15 +5,20 @@ class V1::PractitionersController < ApplicationController
   end
 
   def show
+    practitioner = find_practitioner
+    return unless practitioner
+
+    render :practitioner, locals: {practitioner: practitioner }, status: 200
   end
 
   def create
     practitioner = Practitioner.new(practitioner_params)
+
     authorize practitioner
     if practitioner.create_profile(pundit_user)
-      render json: { profile: practitioner.attributes.merge(profile_pic: rails_blob_path(practitioner.profile_pic, only_path: true)) }, status: 201
+      render :practitioner, status: 201
     else
-      render json: { message: 'Cannot create practitioner profile', errors: practitioner.errors }
+      process_error(practitioner, 'Cannot create practitioner profile')
     end
   end
 
@@ -24,6 +29,13 @@ class V1::PractitionersController < ApplicationController
   end
 
   private
+
+  def find_practitioner
+    practitioner = Practitioner.find_by(id: params[:id])
+    return practitioner if practitioner
+    find_error('practitioner')
+    nil
+  end
 
   def practitioner_params
     params

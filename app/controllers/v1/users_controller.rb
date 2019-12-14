@@ -3,6 +3,13 @@
 class V1::UsersController < ApplicationController
   before_action :pundit_user, except: [:create]
 
+  def show
+    user = find_user
+    return unless user
+
+    render :user, locals: { user: user, token: nil }, status: 200
+  end
+
   def create
     user = User.new(user_params)
 
@@ -51,8 +58,7 @@ class V1::UsersController < ApplicationController
   def find_user
     user = User.find_by(id: params[:id])
     return user if user
-
-    render json: { error: 'Cannot find user' }
+    find_error('user')
     nil
   end
 end
