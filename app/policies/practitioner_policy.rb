@@ -4,7 +4,7 @@ class PractitionerPolicy < ApplicationPolicy
   def create?
     @user.role == 'practitioner'
   end
-  
+
   def update?
     @user == @record
   end

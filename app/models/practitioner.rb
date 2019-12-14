@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Practitioner < ApplicationRecord
   has_one :profile, as: :profilable, dependent: :destroy
   has_one_attached :profile_pic

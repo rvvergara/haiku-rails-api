@@ -58,6 +58,7 @@ class V1::UsersController < ApplicationController
   def find_user
     user = User.find_by(id: params[:id])
     return user if user
+
     find_error('user')
     nil
   end

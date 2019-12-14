@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Profile < ApplicationRecord
   belongs_to :user
   belongs_to :profilable, polymorphic: true
@@ -9,11 +11,11 @@ class Profile < ApplicationRecord
   delegate :last_name, to: :profilable
 
   def self.practitioners
-    where(profilable_type: "Practitioner")
+    where(profilable_type: 'Practitioner')
   end
 
   def self.patients
-    where(profilable_type: "Patient")
+    where(profilable_type: 'Patient')
   end
 
   def data
