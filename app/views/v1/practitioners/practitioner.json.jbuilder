@@ -2,6 +2,7 @@
 
 json.practitioner do
   json.id practitioner.id
+  json.user practitioner.user
   json.first_name practitioner.first_name
   json.last_name practitioner.last_name
   json.education do

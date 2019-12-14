@@ -10,7 +10,7 @@ class PractitionerPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user == @record
+    @user == @record.user
   end
 
   class Scope < Scope
