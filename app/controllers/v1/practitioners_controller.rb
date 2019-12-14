@@ -9,7 +9,7 @@ class V1::PractitionersController < ApplicationController
 
   def create
     practitioner = Practitioner.new(practitioner_params)
-
+    authorize practitioner
     if practitioner.create_profile(pundit_user)
       render json: { profile: practitioner.attributes.merge(profile_pic: rails_blob_path(practitioner.profile_pic, only_path: true)) }, status: 201
     else
