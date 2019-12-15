@@ -8,9 +8,11 @@ class BookingsController < ApplicationController
 
     booking = patient.bookings.build(booking_params)
 
-    
+
     if booking.save_record
+      render :create, locals: { booking: booking }, status: 201
     else
+      process_error(booking, 'Cannot create booking')
     end
   end
 
