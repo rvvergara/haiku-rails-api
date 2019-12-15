@@ -4,13 +4,13 @@ class PractitionerPolicy < ApplicationPolicy
   def create?
     @user.role == 'practitioner'
   end
-  
+
   def update?
-    @user == @record
+    @user == @record.user
   end
 
   def destroy?
-    @user == @record
+    @user == @record.user
   end
 
   class Scope < Scope
