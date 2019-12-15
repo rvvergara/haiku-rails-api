@@ -1,4 +1,6 @@
-class BookingsController < ApplicationController
+class V1::BookingsController < ApplicationController
+  before_action :pundit_user
+
   def show
   end
 
@@ -8,7 +10,7 @@ class BookingsController < ApplicationController
 
     booking = patient.bookings.build(booking_params)
 
-
+    authorize booking
     if booking.save_record
       render :create, locals: { booking: booking }, status: 201
     else
@@ -25,9 +27,9 @@ class BookingsController < ApplicationController
     params
       .require(:booking)
       .permit(
-        :appointment_date
-        :start_time
-        :practitioner_id
+        :appointment_date,
+        :start_time,
+        :practitioner_id,
         :consumed,
         :expired,
         :cancelled,
