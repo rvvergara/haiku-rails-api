@@ -7,7 +7,7 @@ class V1::UsersController < ApplicationController
     user = find_user
     return unless user
 
-    render :user, locals: { user: user, token: nil }, status: 200
+    render :show, locals: { user: user, token: nil }, status: 200
   end
 
   def create
