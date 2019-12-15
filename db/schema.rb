@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_092715) do
+ActiveRecord::Schema.define(version: 2019_12_15_082450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -46,6 +46,20 @@ ActiveRecord::Schema.define(version: 2019_12_14_092715) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["practitioner_id"], name: "index_availabilities_on_practitioner_id"
+  end
+
+  create_table "bookings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "confirmed", default: false, null: false
+    t.time "start_time", null: false
+    t.uuid "patient_id", null: false
+    t.uuid "practitioner_id", null: false
+    t.boolean "consumed", default: false, null: false
+    t.boolean "expired", default: false, null: false
+    t.boolean "cancelled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["patient_id"], name: "index_bookings_on_patient_id"
+    t.index ["practitioner_id"], name: "index_bookings_on_practitioner_id"
   end
 
   create_table "patients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -101,5 +115,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_092715) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "availabilities", "practitioners"
+  add_foreign_key "bookings", "patients"
+  add_foreign_key "bookings", "practitioners"
   add_foreign_key "profiles", "users"
 end
