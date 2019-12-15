@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Booking < ApplicationRecord
   belongs_to :practitioner
   belongs_to :patient
@@ -7,7 +9,8 @@ class Booking < ApplicationRecord
   before_validation :check_if_slot_taken
 
   def save_record
-    return unless self.valid?
+    return unless valid?
+
     save
     # When booking record is created, the booking_id in the slot should be filled and booked set to true
     slot = corresponding_open_slot
@@ -35,7 +38,7 @@ class Booking < ApplicationRecord
     slot = booked_slot
     slot.update(booked: false, booking_id: nil)
   end
-  
+
   private
 
   def check_if_slot_taken

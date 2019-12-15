@@ -1,7 +1,12 @@
+# frozen_string_literal: true
+
 class V1::BookingsController < ApplicationController
   before_action :pundit_user
 
   def show
+    booking = find_booking
+    return unless booking
+    render :booking, locals: { booking: booking }, status: 200
   end
 
   def create
@@ -18,8 +23,7 @@ class V1::BookingsController < ApplicationController
     end
   end
 
-  def update
-  end
+  def update; end
 
   private
 

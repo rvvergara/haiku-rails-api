@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id booking.id
 json.patient_id booking.patient_id
 json.practitioner_id booking.practitioner_id

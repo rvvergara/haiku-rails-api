@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PatientPolicy < ApplicationPolicy
   def create?
     @user.role == 'patient'

@@ -5,7 +5,7 @@ json.user do
   json.profile do
     if user.profilable
       json.partial! 'v1/shared/practitioner', practitioner: user.profilable if user.role == 'practitioner'
-      
+
       json.partial! 'v1/shared/patient', patient: user.profilable if user.role == 'patient'
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AvailabilityPolicy < ApplicationPolicy
   def create?
     @user.role == 'practitioner' && @user == @record.practitioner.user

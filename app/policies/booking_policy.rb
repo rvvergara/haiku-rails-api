@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookingPolicy < ApplicationPolicy
   def show?
     @user == @record.patient.user || @user == @record.practitioner.user
@@ -10,7 +12,7 @@ class BookingPolicy < ApplicationPolicy
   def update?
     @user == @record.patient.user || @user == @record.practitioner.user
   end
-  
+
   class Scope < Scope
     def resolve
       scope.all

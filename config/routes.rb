@@ -6,7 +6,8 @@ Rails.application.routes.draw do
       resources :availabilities
     end
     resources :patients do
-      resources :bookings, except: [:index, :destroy]
+      resources :bookings, except: [:index, :destroy, :show]
     end
+    resources :bookings, only: [:show]
   end
 end
