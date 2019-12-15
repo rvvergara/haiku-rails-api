@@ -7,19 +7,21 @@ class Availability < ApplicationRecord
 
   before_validation :is_valid_range?, :raise_conflict
 
-  after_initialize do
+  after_initialize :set_defaults
+
+  private
+
+  def set_defaults
     current_time = Tod::TimeOfDay(Time.now)
     self.availability_date = Date.today if self.availability_date.nil?
     self.start_time = current_time.strftime('%H:%M:%S') if self.start_time.nil?
     self.end_time = (current_time + 2700).strftime('%H:%M:%S') if self.end_time.nil?
   end
 
-  private
-
   def is_valid_range?
     return if start_time <= end_time
 
-    errors[:base] << 'Start time must be earlier or same as end time.'
+    errors[:time_range] << 'Start time must be earlier or same as end time.'
   end
 
   def has_conflict?
@@ -33,6 +35,6 @@ class Availability < ApplicationRecord
   def raise_conflict
     return unless has_conflict?
 
-    errors[:base] << 'Time  slot has conflict with another record.'
+    errors[:conflict] << 'Time  slot has conflict with another record.'
   end
 end
