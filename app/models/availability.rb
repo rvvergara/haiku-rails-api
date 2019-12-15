@@ -2,7 +2,7 @@
 
 class Availability < ApplicationRecord
   belongs_to :practitioner
-
+  
   validates :availability_date, :start_time, :end_time, presence: true
 
   before_validation :is_valid_range?, :raise_conflict
