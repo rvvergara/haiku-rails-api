@@ -18,6 +18,15 @@ class V1::AvailabilitiesController < ApplicationController
   end
 
   def update
+    availability = find_availability
+    return unless availability
+
+    authorize availability
+    if availability.update(availability_params)
+      render json: { availability: availability }, status: 202
+    else
+      process_error(availability, 'Cannot update availability')
+    end
   end
 
   def destroy
@@ -34,5 +43,13 @@ class V1::AvailabilitiesController < ApplicationController
         :end_time,
         :booked
       )
+  end
+
+  def find_availability
+    availability = Availability.find_by(id: params[:id])
+    return availability if availability
+
+    find_error('availability')
+    nil
   end
 end

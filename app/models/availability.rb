@@ -25,7 +25,7 @@ class Availability < ApplicationRecord
   end
 
   def has_conflict?
-    same_day = Availability.where('availability_date=?', availability_date)
+    same_day = Availability.where('availability_date=? AND id <> ?', availability_date, id)
     same_day.any? do |slot|
       range = slot.start_time..slot.end_time
       range.include?(start_time) || range.include?(end_time) 
