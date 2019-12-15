@@ -7,6 +7,13 @@ class Booking < ApplicationRecord
   before_validation :check_if_slot_taken
 
 
+  def save_record
+    save
+    # When booking record is created, the booking_id in the slot should be filled
+    slot = corresponding_open_slot
+    slot.update(booking_id: id)
+  end
+
   def confirm
     # set booking confirmed to true
     update(confirmed: true)
@@ -17,10 +24,16 @@ class Booking < ApplicationRecord
 
   def cancel
     # set cancelled column to true
-
+    update(cancelled: true)
     # set booked column in availability record to true
+    slot = booked_slot
+    slot.update(booked: false, booking_id: nil)
   end
 
+  def reject
+    # set 
+  end
+  
   private
 
   def check_if_slot_taken
@@ -42,6 +55,8 @@ class Booking < ApplicationRecord
   end
 
   def booked_slot
-    
+    Availability.where(
+      'booking_id=?', id
+    ).first
   end
 end

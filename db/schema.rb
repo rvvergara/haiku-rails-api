@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_15_095429) do
+ActiveRecord::Schema.define(version: 2019_12_15_102051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_12_15_095429) do
     t.boolean "cancelled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "rejected", default: false, null: false
     t.index ["patient_id"], name: "index_bookings_on_patient_id"
     t.index ["practitioner_id"], name: "index_bookings_on_practitioner_id"
   end
