@@ -2,8 +2,10 @@
 
 class Practitioner < ApplicationRecord
   has_one :profile, as: :profilable, dependent: :destroy
-  has_one_attached :profile_pic
+  has_one_attached :profile_pic, dependent: :purge
   has_many :availabilities, foreign_key: :practitioner_id
+  has_many :bookings, foreign_key: :practitioner_id
+  has_many :appointment_setters, through: :bookings, source: :patient
 
   validates :first_name, presence: true
   validates :last_name, presence: true

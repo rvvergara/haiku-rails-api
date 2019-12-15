@@ -2,6 +2,7 @@ class CreateBookings < ActiveRecord::Migration[5.2]
   def change
     create_table :bookings, id: :uuid do |t|
       t.boolean :confirmed, null: false, default: false
+      t.date :appointment_date, null: false
       t.time :start_time, null: false
       t.uuid :patient_id, null: false
       t.uuid :practitioner_id, null: false

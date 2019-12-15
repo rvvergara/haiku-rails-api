@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_12_15_082450) do
 
   create_table "bookings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "confirmed", default: false, null: false
+    t.date "appointment_date", null: false
     t.time "start_time", null: false
     t.uuid "patient_id", null: false
     t.uuid "practitioner_id", null: false
