@@ -31,7 +31,12 @@ class Booking < ApplicationRecord
   end
 
   def reject
-    # set 
+    # set rejected column value to true
+    update(rejected: true)
+
+    # set booked value in slot to false and booking_id to nil
+    slot = booked_slot
+    slot.update(booked: false, booking_id: nil)
   end
   
   private
