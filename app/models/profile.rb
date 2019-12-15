@@ -10,14 +10,6 @@ class Profile < ApplicationRecord
   delegate :first_name, to: :profilable
   delegate :last_name, to: :profilable
 
-  def self.practitioners
-    where(profilable_type: 'Practitioner')
-  end
-
-  def self.patients
-    where(profilable_type: 'Patient')
-  end
-
   def data
     profilable
   end
