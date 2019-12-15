@@ -1,12 +1,22 @@
 class V1::AvailabilitiesController < ApplicationController
   def index
+    practitioner = find_practitioner
+    return unless practitioner
+
+    render json: { availabilities: practitioner.availabilities }, status: 200
   end
 
   def show
+    availability = find_availability
+    return unless availability
+
+    render json: { availability: availability }, status: 200
   end
 
   def create
-    practitioner = Practitioner.find(params[:practitioner_id])
+    practitioner = find_practitioner
+    return unless practitioner
+
     availability = practitioner.availabilities.build(availability_params)
 
     authorize availability
@@ -30,6 +40,15 @@ class V1::AvailabilitiesController < ApplicationController
   end
 
   def destroy
+    availability = find_availability
+    return unless availability
+
+    authorize availability
+    if availability.destroy
+      action_success('Availability slot deleted', 202)
+    else
+      process_error(availability, 'Something went wrong')
+    end
   end
 
   private
@@ -50,6 +69,14 @@ class V1::AvailabilitiesController < ApplicationController
     return availability if availability
 
     find_error('availability')
+    nil
+  end
+
+  def find_practitioner
+    practitioner = Practitioner.find_by(id: params[:practitioner_id])
+    return practitioner if practitioner
+
+    find_error('practitioner')
     nil
   end
 end

@@ -7,6 +7,10 @@ class AvailabilityPolicy < ApplicationPolicy
     @user == @record.practitioner.user
   end
 
+  def destroy?
+    @user = @record.practitioner.user
+  end
+
   class Scope < Scope
     def resolve
       scope.all
