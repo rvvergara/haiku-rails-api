@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class V1::AvailabilitiesController < ApplicationController
+  before_action :pundit_user
+
   def index
     practitioner = find_practitioner
     return unless practitioner

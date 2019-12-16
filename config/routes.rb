@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     resources :users, only: [:show, :create, :update, :destroy]
     resources :practitioners do
       resources :availabilities
+      resources :bookings, module: :practitioners, only: [:create]
     end
-    resources :patients
+    resources :patients do
+      resources :bookings, except: [:destroy, :show, :index]
+    end
+    resources :bookings, only: [:show, :index]
   end
 end

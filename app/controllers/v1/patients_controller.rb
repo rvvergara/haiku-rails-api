@@ -17,7 +17,9 @@ class V1::PatientsController < ApplicationController
     patient = Patient.new(patient_params)
 
     if patient.create_profile(pundit_user)
-      render json: { profile: patient.attributes.merge(profile_pic: rails_blob_path(patient.profile_pic, only_path: true)) }, status: 201
+      render :patient, locals: {
+        patient: patient
+      }, status: 201
     end
   end
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PatientPolicy, type: :policy do
+RSpec.describe BookingPolicy, type: :policy do
   let(:user) { User.new }
 
   subject { described_class }

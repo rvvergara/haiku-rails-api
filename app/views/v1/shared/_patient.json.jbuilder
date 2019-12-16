@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id patient.id
 json.first_name patient.first_name
 json.last_name patient.last_name
@@ -8,5 +10,5 @@ json.birthday patient.birthday
 json.passport patient.passport
 json.contact_number patient.contact_number
 json.points patient.points
-json.profile_pic rails_blob_path(patient.profile_pic, only_path: true)
+json.profile_pic rails_blob_path(patient.profile_pic, only_path: true) if patient.profile_pic.attached?
 json.languages { json.array! patient.languages }
