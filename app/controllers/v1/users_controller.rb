@@ -7,7 +7,7 @@ class V1::UsersController < ApplicationController
     user = find_user
     return unless user
 
-    render :show, locals: { user: user, token: nil }, status: 200
+    render :user, locals: { user: user, token: nil }, status: 200
   end
 
   def create
@@ -15,7 +15,7 @@ class V1::UsersController < ApplicationController
 
     if user.save
       token = JsonWebToken.encode(id: user.id)
-      render :user, locals: { user: user, token: token }, status: 201
+      render :create, locals: { user: user, token: token }, status: 201
     else
       render json: { message: 'Cannot create account', errors: user.errors }, status: 422
     end
