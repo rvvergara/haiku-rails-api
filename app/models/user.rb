@@ -11,6 +11,7 @@ class User < ApplicationRecord
 
   has_one :profile, foreign_key: :user_id, dependent: :destroy
 
-  delegate :first_name, to: :profile
-  delegate :last_name, to: :profile
+  delegate :first_name, :last_name, to: :profile
+  delegate :profilable, to: :profile
+  delegate :bookings, to: :profilable
 end

@@ -3,6 +3,12 @@
 class V1::BookingsController < ApplicationController
   before_action :pundit_user
 
+  def index
+    bookings = pundit_user.bookings
+
+    render :bookings, locals: { bookings: bookings }, status: 200
+  end
+
   def show
     booking = find_booking
     return unless booking
