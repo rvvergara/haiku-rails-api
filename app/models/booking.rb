@@ -28,6 +28,7 @@ class Booking < ApplicationRecord
     # set booked column in availability record to true
     slot = booked_slot
     slot.update(booked: false, booking_id: nil)
+    save
   end
 
   def reject
@@ -37,6 +38,7 @@ class Booking < ApplicationRecord
     # set booked value in slot to false and booking_id to nil
     slot = booked_slot
     slot.update(booked: false, booking_id: nil)
+    save
   end
 
   private
