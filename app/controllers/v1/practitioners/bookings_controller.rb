@@ -5,9 +5,9 @@ class V1::Practitioners::BookingsController < V1::BookingsController
     practitioner = find_practitioner
     return unless practitioner
 
-    booking = practitioner.bookings.build(booking_params)
-
+    booking = practitioner.bookings.build(booking_params.merge(patient_id: pundit_user.profilable.id))
     
+    authorize booking
     if booking.save_record
       render json: { booking: booking }, status: 201
     else
@@ -31,7 +31,6 @@ class V1::Practitioners::BookingsController < V1::BookingsController
       .permit(
         :appointment_date,
         :start_time,
-        :patient_id,
         :consumed,
         :expired,
         :cancelled,
