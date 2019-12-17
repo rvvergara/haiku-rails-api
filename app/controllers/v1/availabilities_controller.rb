@@ -13,8 +13,9 @@ class V1::AvailabilitiesController < ApplicationController
   def show
     availability = find_availability
     return unless availability
-
-    render json: { availability: availability }, status: 200
+    
+    authorize availability
+    render :availability, locals: { availability: availability }, status: 200
   end
 
   def create
