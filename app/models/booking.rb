@@ -19,6 +19,7 @@ class Booking < ApplicationRecord
   end
 
   def confirm
+    return if status == 'confirmed'
     update(status: 'confirmed')
     save
   end

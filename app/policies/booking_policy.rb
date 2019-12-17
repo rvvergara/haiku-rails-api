@@ -13,6 +13,10 @@ class BookingPolicy < ApplicationPolicy
     @user == @record.patient.user || @user == @record.practitioner.user
   end
 
+  def confirm?
+    @user.role == 'practitioner' && @user.profilable == @record.practitioner
+  end
+
   class Scope < Scope
     def resolve
       scope.all

@@ -10,5 +10,6 @@ Rails.application.routes.draw do
       resources :bookings, except: [:destroy, :show, :index]
     end
     resources :bookings, only: [:show, :index]
+    put 'bookings/:id/confirm', to: 'bookings#confirm'
   end
 end

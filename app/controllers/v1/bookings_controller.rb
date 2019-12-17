@@ -15,6 +15,22 @@ class V1::BookingsController < ApplicationController
     render :booking, locals: { booking: booking }, status: 200
   end
 
+  # Custom action names for bookings
+  # 1. Practitioner confirming
+  def confirm
+    booking = find_booking
+    return unless booking
+
+    authorize booking, :confirm?
+    if booking.confirm
+      render :booking, locals: { booking: booking }, status: 202
+    else
+      process_error(booking, 'Cannot confirm booking. Booking may have already been confirmed.')
+    end
+  end
+
+
+
   private
 
   def find_booking
