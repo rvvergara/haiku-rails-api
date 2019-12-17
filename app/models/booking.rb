@@ -10,38 +10,41 @@ class Booking < ApplicationRecord
 
   def save_record
     return unless valid?
-
     save
-    # When booking record is created, the booking_id in the slot should be filled and booked set to true
-    slot = corresponding_open_slot
-    slot.update(booked: true, booking_id: id)
-    slot.save
+    attach_booking_to_availability
   end
 
-  def confirm
+  def confirm(params)
     return if status == 'confirmed'
-    update(status: 'confirmed')
+    update_attributes(
+      status: 'confirmed',
+      practitioner_remarks: params[:practitioner_remarks],
+      patient_remarks: params[:patient_remarks]
+    )
     save
   end
 
-  def cancel
+  def cancel(params)
     return if status == 'cancelled'
     # set cancelled column to true
-    update(status: 'cancelled')
-    # set booked column in availability record to true
-    slot = booked_slot
-    slot.update(booked: false, booking_id: nil)
+    update_attributes(
+      status: 'cancelled',
+      practitioner_remarks: params[:practitioner_remarks],
+      patient_remarks: params[:patient_remarks]
+    )
+    reset_availability
     save
   end
 
-  def reject
+  def reject(params)
     return if status == 'rejected'
     # set rejected column value to true
-    update(status: 'rejected')
-
-    # set booked value in slot to false and booking_id to nil
-    slot = booked_slot
-    slot.update(booked: false, booking_id: nil)
+    update_attributes(
+      status: 'rejected',
+      practitioner_remarks: params[:practitioner_remarks],
+      patient_remarks: params[:patient_remarks]
+    )
+    reset_availability
     save
   end
 
@@ -70,5 +73,21 @@ class Booking < ApplicationRecord
       # 'booking_id=?', id
       'practitioner_id=? AND start_time=? AND availability_date=? AND booked=?', practitioner_id, start_time, appointment_date, true
     ).first
+  end
+
+  def attach_booking_to_availability
+    # When booking record is created, the booking_id in the slot should be filled and booked set to true
+    slot = corresponding_open_slot
+    slot.update(
+      booked: true, 
+      booking_id: id
+    )
+  end
+
+  def reset_availability
+    # set booked column in availability record to false
+    # set booking_id back to nil
+    slot = booked_slot
+    slot.update_attributes(booked: false, booking_id: nil)
   end
 end

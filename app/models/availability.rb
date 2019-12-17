@@ -5,7 +5,7 @@ class Availability < ApplicationRecord
   
   validates :availability_date, :start_time, :end_time, presence: true
 
-  before_validation :is_valid_range?, :raise_conflict
+  before_validation :is_valid_range?, :raise_conflict, on: [:create]
 
   after_initialize :set_defaults
 

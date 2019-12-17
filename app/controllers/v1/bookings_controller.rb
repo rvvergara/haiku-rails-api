@@ -22,7 +22,7 @@ class V1::BookingsController < ApplicationController
     return unless booking
 
     authorize booking, :practitioner_booking_response?
-    if booking.confirm
+    if booking.confirm(booking_params)
       render :booking, locals: { booking: booking }, status: 202
     else
       process_error(booking, 'Cannot confirm booking. Booking may have already been confirmed.')
@@ -35,7 +35,7 @@ class V1::BookingsController < ApplicationController
     return unless booking
 
     authorize booking, :practitioner_booking_response?
-    if booking.reject
+    if booking.reject(booking_params)
       render :booking, locals: { booking: booking }, status: 202
     else
       process_error(booking, 'Cannot reject booking. Booking may have already been rejected or cancelled.')
@@ -48,7 +48,7 @@ class V1::BookingsController < ApplicationController
     return unless booking
 
     authorize booking, :patient_booking_response?
-    if booking.cancel
+    if booking.cancel(booking_params)
       render :booking, locals: { booking: booking }, status: 202
     else
       process_error(booking, 'Cannot cancel booking. Booking may have already been rejected or cancelled.')
@@ -57,10 +57,20 @@ class V1::BookingsController < ApplicationController
 
   private
 
+  def booking_params
+    params
+      .require(:booking)
+      .permit(
+        :practitioner_remarks,
+        :patient_remarks
+      )
+  end
+
   def find_booking
     booking = Booking.find_by(id: params[:id])
     return booking if booking
 
     find_error('booking')
+    nil
   end
 end
