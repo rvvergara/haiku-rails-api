@@ -13,7 +13,7 @@ class BookingPolicy < ApplicationPolicy
     @user == @record.patient.user || @user == @record.practitioner.user
   end
 
-  def confirm?
+  def practitioner_booking_response?
     @user.role == 'practitioner' && @user.profilable == @record.practitioner
   end
 

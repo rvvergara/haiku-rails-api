@@ -34,6 +34,7 @@ class Booking < ApplicationRecord
   end
 
   def reject
+    return if status == 'rejected'
     # set rejected column value to true
     update(status: 'rejected')
 

@@ -21,7 +21,7 @@ class V1::BookingsController < ApplicationController
     booking = find_booking
     return unless booking
 
-    authorize booking, :confirm?
+    authorize booking, :practitioner_booking_response?
     if booking.confirm
       render :booking, locals: { booking: booking }, status: 202
     else
@@ -29,7 +29,18 @@ class V1::BookingsController < ApplicationController
     end
   end
 
+  # 2. Practitioner rejecting a booking
+  def reject
+    booking = find_booking
+    return unless booking
 
+    authorize booking, :practitioner_booking_response?
+    if booking.reject
+      render :booking, locals: { booking: booking }, status: 202
+    else
+      process_error(booking, 'Cannot reject booking. Booking may have already been rejected.')
+    end
+  end
 
   private
 
