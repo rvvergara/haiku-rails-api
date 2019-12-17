@@ -25,6 +25,7 @@ class Booking < ApplicationRecord
   end
 
   def cancel
+    return if status == 'cancelled'
     # set cancelled column to true
     update(status: 'cancelled')
     # set booked column in availability record to true

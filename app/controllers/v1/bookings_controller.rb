@@ -38,7 +38,20 @@ class V1::BookingsController < ApplicationController
     if booking.reject
       render :booking, locals: { booking: booking }, status: 202
     else
-      process_error(booking, 'Cannot reject booking. Booking may have already been rejected.')
+      process_error(booking, 'Cannot reject booking. Booking may have already been rejected or cancelled.')
+    end
+  end
+  
+  # 3. Patient cancelling a booking
+  def cancel
+    booking = find_booking
+    return unless booking
+
+    authorize booking, :patient_booking_response?
+    if booking.cancel
+      render :booking, locals: { booking: booking }, status: 202
+    else
+      process_error(booking, 'Cannot cancel booking. Booking may have already been rejected or cancelled.')
     end
   end
 
