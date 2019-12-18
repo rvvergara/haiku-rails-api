@@ -14,4 +14,28 @@ class User < ApplicationRecord
   delegate :first_name, :last_name, to: :profile
   delegate :profilable, to: :profile
   delegate :bookings, to: :profilable
+
+  before_create :create_activation_digest
+
+  # This will return true if the token matches the digest
+  def email_authenticated?(attribute, token)
+    digest = send("#{attribute}_digest")
+    return false if digest.nil?
+
+    BCrypt::Password.new(digest).is_password?(token)
+  end
+
+  private
+  # Activation related methods
+  # 1. Returns a hashed digest of a given string
+  def self.digest(string)
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password .create(string, cost: cost)
+  end
+
+  # 2. Method to create an activation digest
+  def create_activation_digest
+    token = JsonWebToken.encode({ id: id })
+    self.activation_digest = User.digest(token)
+  end
 end
