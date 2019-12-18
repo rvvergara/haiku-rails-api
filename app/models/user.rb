@@ -42,6 +42,6 @@ class User < ApplicationRecord
   # 2. Method to create an activation digest
   def create_activation_digest
     self.activation_token = JsonWebToken.encode({ id: id })
-    self.activation_digest = User.digest(token)
+    self.activation_digest = User.digest(activation_token)
   end
 end
