@@ -25,6 +25,11 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  # Method to send activation email
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
   private
   # Activation related methods
   # 1. Returns a hashed digest of a given string
