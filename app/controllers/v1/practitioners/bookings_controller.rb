@@ -6,7 +6,7 @@ class V1::Practitioners::BookingsController < V1::BookingsController
     return unless practitioner
 
     booking = practitioner.bookings.build(booking_params.merge(patient_id: pundit_user.profilable.id))
-    
+
     authorize booking
     if booking.save_record
       render json: { booking: booking }, status: 201
@@ -31,10 +31,8 @@ class V1::Practitioners::BookingsController < V1::BookingsController
       .permit(
         :appointment_date,
         :start_time,
-        :consumed,
-        :expired,
-        :cancelled,
-        :rejected
+        :practitioner_remarks,
+        :patient_remarks
       )
   end
 end

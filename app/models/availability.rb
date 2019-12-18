@@ -5,7 +5,7 @@ class Availability < ApplicationRecord
   
   validates :availability_date, :start_time, :end_time, presence: true
 
-  before_validation :is_valid_range?, :raise_conflict
+  before_validation :is_valid_range?, :raise_conflict, on: [:create]
 
   after_initialize :set_defaults
 
@@ -25,16 +25,15 @@ class Availability < ApplicationRecord
   end
 
   def has_conflict?
-    same_day = Availability.where('availability_date=? AND id <> ?', availability_date, id)
+    same_day = Availability.where('availability_date=? AND practitioner_id=?', availability_date, practitioner_id)
     same_day.any? do |slot|
-      range = slot.start_time..slot.end_time
-      range.include?(start_time) || range.include?(end_time)
+      [slot.start_time, start_time].max < [slot.end_time, end_time].min
     end
   end
 
   def raise_conflict
     return unless has_conflict?
 
-    errors[:conflict] << 'Time  slot has conflict with another record.'
+    errors[:time_slot] << 'has conflict with another record.'
   end
 end
