@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :account_activations, only: [:edit]
   namespace :v1, defaults: { format: :json } do
     resources :sessions, only: [:create]
     resources :users, only: [:show, :create, :update, :destroy]
