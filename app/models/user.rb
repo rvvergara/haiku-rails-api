@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  attr_accessor :activation_token
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -40,7 +41,7 @@ class User < ApplicationRecord
 
   # 2. Method to create an activation digest
   def create_activation_digest
-    token = JsonWebToken.encode({ id: id })
+    self.activation_token = JsonWebToken.encode({ id: id })
     self.activation_digest = User.digest(token)
   end
 end
