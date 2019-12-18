@@ -15,6 +15,7 @@ gem 'pundit'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.4'
 gem 'tod'
+gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
