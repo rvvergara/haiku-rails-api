@@ -18,6 +18,12 @@ class User < ApplicationRecord
 
   before_create :create_activation_digest
 
+
+  # Returns a random token
+  def self.new_token
+    SecureRandom.urlsafe_base64
+  end
+
   # This will return true if the token matches the digest
   def email_authenticated?(attribute, token)
     digest = send("#{attribute}_digest")
@@ -47,7 +53,7 @@ class User < ApplicationRecord
 
   # 2. Method to create an activation digest
   def create_activation_digest
-    self.activation_token = JsonWebToken.encode({ id: id })
+    self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
   end
 end

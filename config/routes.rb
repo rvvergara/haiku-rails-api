@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :account_activations, only: [:edit]
   namespace :v1, defaults: { format: :json } do
     resources :sessions, only: [:create]
     resources :users, only: [:show, :create, :update, :destroy]
@@ -11,10 +10,11 @@ Rails.application.routes.draw do
       resources :bookings, except: [:destroy, :show, :index]
     end
     resources :bookings, only: [:show, :index]
-    put 'bookings/:id/confirm', to: 'bookings#confirm'
+    get 'activate/:id', to: 'account_activations#activate', as: 'account_activation'
+    put 'bookings/:id/confirm', to: 'bookings#confirm', as: 'booking_confirm'
     
-    put 'bookings/:id/reject', to: 'bookings#reject'
+    put 'bookings/:id/reject', to: 'bookings#reject', as: 'booking_reject'
 
-    put 'bookings/:id/cancel', to: 'bookings#cancel'
+    put 'bookings/:id/cancel', to: 'bookings#cancel', as: 'booking_cancel'
   end
 end
