@@ -1,0 +1,7 @@
+<h1>Igaku</h1>
+<p>Hi,</p>
+<p>
+  Welcome to Igaku! Click below to activate your account!
+</p>
+
+<%= link_to "Activate", v1_account_activation_url(@user.activation_token, email: @user.email) %>

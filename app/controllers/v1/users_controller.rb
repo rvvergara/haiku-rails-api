@@ -14,8 +14,8 @@ class V1::UsersController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      token = JsonWebToken.encode(id: user.id)
-      render :create, locals: { user: user, token: token }, status: 201
+      user.send_activation_email
+      render json: { message: 'You need to confirm your email. Please check your email for the confirmation link.'}
     else
       render json: { message: 'Cannot create account', errors: user.errors }, status: 422
     end
