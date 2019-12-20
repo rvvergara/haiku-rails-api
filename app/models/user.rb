@@ -12,12 +12,10 @@ class User < ApplicationRecord
 
   has_one :profile, foreign_key: :user_id, dependent: :destroy
 
-  delegate :first_name, :last_name, to: :profile
-  delegate :profilable, to: :profile
+  delegate :first_name, :last_name, :profilable, to: :profile
   delegate :bookings, to: :profilable
 
   before_create :create_activation_digest
-
 
   # Returns a random token
   def self.new_token
