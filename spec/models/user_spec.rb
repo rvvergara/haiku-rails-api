@@ -48,4 +48,13 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'activate method' do
+    context 'a new user' do
+      let(:user) { create(:user, :patient) }
+      it "changes the user's activated attribute" do
+        expect { user.activate }.to change { user.activated }.from(false).to(true)
+      end
+    end
+  end
 end
