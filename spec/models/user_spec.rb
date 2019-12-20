@@ -20,4 +20,21 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'before create callback' do
+    let(:doctor) { build(:user, :practitioner) }
+    before { doctor.save }
+    
+    context 'user activation_token' do
+      it 'is created' do
+        expect(doctor.activation_token).to_not be(nil)
+      end
+    end
+
+    context 'user activation_digest' do
+      it 'is created' do
+        expect(doctor.activation_digest).to_not be(nil)
+      end
+    end
+  end
 end
