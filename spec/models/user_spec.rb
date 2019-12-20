@@ -37,4 +37,15 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'send_activation email method' do
+    context 'UserMailer.account_activation method' do
+      subject { create(:user, :patient) }
+      it 'sends an email' do
+        expect { subject.send_activation_email }
+          .to change { ActionMailer::Base.deliveries.count }
+          .by(1)
+      end
+    end
+  end
 end
