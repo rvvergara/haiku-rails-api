@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(version: 2019_12_23_081310) do
 
   create_table "clinics", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "avatar"
-    t.string "name"
-    t.string "address"
-    t.string "postal_code"
-    t.string "category"
-    t.string "openning_hours"
-    t.uuid "creator_id"
+    t.string "name", null: false
+    t.string "address", null: false
+    t.string "postal_code", default: "", null: false
+    t.string "category", default: "", null: false
+    t.string "openning_hours", default: [], array: true
+    t.uuid "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["creator_id"], name: "index_clinics_on_creator_id"

@@ -6,6 +6,7 @@ class Practitioner < ApplicationRecord
   has_many :availabilities, foreign_key: :practitioner_id
   has_many :bookings, foreign_key: :practitioner_id
   has_many :appointment_setters, through: :bookings, source: :patient
+  has_many :created_clinics, foreign_key: :creator_id, class_name: 'Clinic'
 
   validates :first_name, presence: true
   validates :last_name, presence: true
