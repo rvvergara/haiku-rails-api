@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     resources :practitioners do
       resources :availabilities
       resources :bookings, module: :practitioners, only: [:create]
+      resources :clinics, only: [:create]
     end
     resources :patients do
       resources :bookings, except: [:destroy, :show, :index]
