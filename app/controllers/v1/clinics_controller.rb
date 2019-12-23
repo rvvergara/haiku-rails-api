@@ -22,9 +22,27 @@ class V1::ClinicsController < ApplicationController
   end
 
   def update
+    clinic = find_clinic
+    return unless clinic
+
+    authorize clinic
+    if clinic.update(clinic_params)
+      render :clinic, locals: { clinic: clinic }, status: 202
+    else
+      process_error(clinic, 'Cannot update clinic')
+    end
   end
 
   def destroy
+    clinic = find_clinic
+    return unless clinic
+
+    authorize clinic
+    if clinic.destroy
+      action_success('Clinic deleted')
+    else
+      process_error(clinic, 'Cannot delete clinic')
+    end
   end
 
   private
@@ -47,6 +65,14 @@ class V1::ClinicsController < ApplicationController
     return practitioner if practitioner
 
     find_error('practitioner')
+    nil
+  end
+
+  def find_clinic
+    clinic = Clinic.find_by(id: params[:id])
+    return clinic if clinic
+
+    find_error('clinic')
     nil
   end
 end

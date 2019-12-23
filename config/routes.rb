@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :bookings, except: [:destroy, :show, :index]
     end
     resources :bookings, only: [:show, :index]
+    resources :clinics, only: [:update, :destroy]
     get 'activate/:id', to: 'account_activations#activate', as: 'account_activation'
     put 'bookings/:id/confirm', to: 'bookings#confirm', as: 'booking_confirm'
     
