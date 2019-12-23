@@ -13,7 +13,7 @@ class V1::AvailabilitiesController < ApplicationController
   def show
     availability = find_availability
     return unless availability
-    
+
     authorize availability
     render :availability, locals: { availability: availability }, status: 200
   end

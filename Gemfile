@@ -5,6 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.4'
 gem 'aws-sdk-s3', require: false
+gem 'bcrypt'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise'
 gem 'jbuilder', '~> 2.5'
@@ -15,7 +16,6 @@ gem 'pundit'
 gem 'rack-cors'
 gem 'rails', '~> 5.2.4'
 gem 'tod'
-gem 'bcrypt'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

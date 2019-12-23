@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ClinicPolicy < ApplicationPolicy
   def create?
     @user == @record.user
@@ -6,7 +8,7 @@ class ClinicPolicy < ApplicationPolicy
   def update?
     @user.profilable == @record.creator
   end
-  
+
   def destroy?
     @user.profilable == @record.creator
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id clinic.id
 json.creator_id clinic.creator_id
 json.name clinic.name

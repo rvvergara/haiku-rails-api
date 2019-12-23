@@ -12,6 +12,7 @@ class V1::BookingsController < ApplicationController
   def show
     booking = find_booking
     return unless booking
+
     render :booking, locals: { booking: booking }, status: 200
   end
 
@@ -41,7 +42,7 @@ class V1::BookingsController < ApplicationController
       process_error(booking, 'Cannot reject booking. Booking may have already been rejected or cancelled.')
     end
   end
-  
+
   # 3. Patient cancelling a booking
   def cancel
     booking = find_booking

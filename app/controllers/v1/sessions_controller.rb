@@ -9,7 +9,7 @@ class V1::SessionsController < ApplicationController
         token = JsonWebToken.encode(id: user.id)
         render :create, locals: { user: user, token: token }, status: 200
       else
-        render json: { message: 'You need to first confirm your email. Please check your email for confirmation link provided when you signed up.'}, status: 401
+        render json: { message: 'You need to first confirm your email. Please check your email for confirmation link provided when you signed up.' }, status: 401
       end
     else
       render json: { error: 'Invalid Credentials' }, status: 401

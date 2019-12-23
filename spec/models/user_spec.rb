@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   describe 'validations' do
     let (:ted) { build(:user, :patient) }
     let (:nomad) { build(:user, :invalid_user) }
-    
+
     context 'complete sign up info' do
       it 'is valid' do
         expect(ted).to be_valid
@@ -24,7 +24,7 @@ RSpec.describe User, type: :model do
   describe 'before create callback' do
     let(:doctor) { build(:user, :practitioner) }
     before { doctor.save }
-    
+
     context 'user activation_token' do
       it 'is created' do
         expect(doctor.activation_token).to_not be(nil)

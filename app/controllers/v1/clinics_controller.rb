@@ -1,11 +1,11 @@
+# frozen_string_literal: true
+
 class V1::ClinicsController < ApplicationController
   before_action :pundit_user
-  
-  def index
-  end
 
-  def show
-  end
+  def index; end
+
+  def show; end
 
   def create
     practitioner = find_practitioner

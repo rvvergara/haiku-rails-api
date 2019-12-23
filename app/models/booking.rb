@@ -10,12 +10,14 @@ class Booking < ApplicationRecord
 
   def save_record
     return unless valid?
+
     save
     attach_booking_to_availability
   end
 
   def confirm(params)
     return if status == 'confirmed'
+
     update_attributes(
       status: 'confirmed',
       practitioner_remarks: params[:practitioner_remarks],
@@ -26,6 +28,7 @@ class Booking < ApplicationRecord
 
   def cancel(params)
     return if status == 'cancelled'
+
     # set cancelled column to true
     update_attributes(
       status: 'cancelled',
@@ -38,6 +41,7 @@ class Booking < ApplicationRecord
 
   def reject(params)
     return if status == 'rejected'
+
     # set rejected column value to true
     update_attributes(
       status: 'rejected',
@@ -79,7 +83,7 @@ class Booking < ApplicationRecord
     # When booking record is created, the booking_id in the slot should be filled and booked set to true
     slot = corresponding_open_slot
     slot.update(
-      booked: true, 
+      booked: true,
       booking_id: id
     )
   end

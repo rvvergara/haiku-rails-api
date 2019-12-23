@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Clinic < ApplicationRecord
   belongs_to :creator, class_name: 'Practitioner'
   has_one_attached :avatar, dependent: :purge
