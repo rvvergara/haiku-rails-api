@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2019_12_23_081310) do
     t.string "address", null: false
     t.string "postal_code", default: "", null: false
     t.string "category", default: "", null: false
-    t.string "openning_hours", default: [], array: true
+    t.string "operating_hours", default: [], array: true
     t.uuid "creator_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

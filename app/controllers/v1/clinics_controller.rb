@@ -38,7 +38,7 @@ class V1::ClinicsController < ApplicationController
         :address,
         :postal_code,
         :category,
-        openning_hours: []
+        operating_hours: []
       )
   end
 

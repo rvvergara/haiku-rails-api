@@ -6,7 +6,7 @@ class CreateClinics < ActiveRecord::Migration[5.2]
       t.string :address, null: false
       t.string :postal_code, null: false, default: ''
       t.string :category, null: false, default: ''
-      t.string :openning_hours, array: true, default: []
+      t.string :operating_hours, array: true, default: []
       t.uuid :creator_id, null: false
 
       t.timestamps

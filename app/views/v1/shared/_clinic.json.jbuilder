@@ -5,4 +5,4 @@ json.address clinic.address
 json.avatar rails_blob_path(clinic.avatar, only_path: true)
 json.postal_code clinic.postal_code
 json.category clinic.category
-json.openning_hours { json.array! clinic.openning_hours }
+json.operating_hours { json.array! clinic.operating_hours }
