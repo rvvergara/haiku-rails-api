@@ -35,13 +35,13 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
-
   # Method to activate user
   def activate
     update_columns(activated: true, activated_at: Time.now)
   end
 
   private
+
   # Activation related methods
   # 1. Returns a hashed digest of a given string
   def self.digest(string)

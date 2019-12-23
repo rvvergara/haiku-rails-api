@@ -15,7 +15,7 @@ class V1::UsersController < ApplicationController
 
     if user.save
       user.send_activation_email
-      render json: { message: 'You need to confirm your email. Please check your email for the confirmation link.'}
+      render json: { message: 'You need to confirm your email. Please check your email for the confirmation link.' }
     else
       render json: { message: 'Cannot create account', errors: user.errors }, status: 422
     end

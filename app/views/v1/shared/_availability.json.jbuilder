@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.id availability.id
 json.practitioner_id availability.practitioner_id
 json.date availability.availability_date.strftime('%B %d, %Y')

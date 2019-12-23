@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class V1::Practitioners::BookingsController < V1::BookingsController
   before_action :pundit_user
 

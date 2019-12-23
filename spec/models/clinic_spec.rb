@@ -2,6 +2,6 @@
 
 require 'rails_helper'
 
-RSpec.describe UserMailer, type: :mailer do
+RSpec.describe Clinic, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
