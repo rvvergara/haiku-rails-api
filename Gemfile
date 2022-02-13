@@ -11,10 +11,10 @@ gem 'devise', '>= 4.7.1'
 gem 'jbuilder', '~> 2.9', '>= 2.9.1'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3', '>= 4.3.11'
 gem 'pundit', '>= 2.1.0'
 gem 'rack-cors', '>= 1.1.0'
-gem 'rails', '~> 5.2.4', '>= 5.2.4.3'
+gem 'rails', '~> 5.2.6', '>= 5.2.6.2'
 gem 'tod'
 
 group :development, :test do
