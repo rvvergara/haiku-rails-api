@@ -3,18 +3,19 @@ default: &default
   encoding: unicode
   host: localhost
   timeout: 5000
-  username: <%= Rails.application.credentials.db[:username] %>
-  password: <%= Rails.application.credentials.db[:password] %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['db_username'] %>
+  password: <%= ENV['db_password'] %>
 
 development:
   <<: *default
-  database: igaku-rails-backend_development
+  database: igaku_rails_backend_development
 test:
   <<: *default
-  database: igaku-rails-backend_test
+  database: igaku_rails_backend_test
+  username: <%= ENV['db_username'] %>
+  password: <%= ENV['db_password'] %>
 production:
   <<: *default
-  database: igaku-rails-backend_production
+  database: igaku_rails_backend_production
   username: igaku-rails-backend
-  password: <%= ENV['IGAKU-RAILS-BACKEND_DATABASE_PASSWORD'] %>
+  password: <%= ENV['db_password'] %>
