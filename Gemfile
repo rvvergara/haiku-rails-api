@@ -24,6 +24,7 @@ group :development, :test do
   gem 'hirb'
   gem 'pry-rails'
   gem 'rspec-rails', '>= 3.9.0'
+  gem 'figaro'
 end
 
 group :development do
