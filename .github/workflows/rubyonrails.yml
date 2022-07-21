@@ -19,13 +19,18 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: rails_test
+          POSTGRES_DB: igaku_rails_backend_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
+      - name: Create env file
+        uses: ruby/.env
+        with:
+          db_username: rails
+          db_password: password
       - name: Checkout code
         uses: actions/checkout@v3
       # Add or replace dependency steps here
