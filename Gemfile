@@ -7,23 +7,23 @@ ruby '2.7.5'
 gem 'aws-sdk-s3', require: false
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'devise', '>= 4.7.1'
-gem 'jbuilder', '~> 2.9', '>= 2.9.1'
+gem 'devise', '>= 4.8.1'
+gem 'jbuilder', '~> 2.11', '>= 2.11.5'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3', '>= 4.3.12'
-gem 'pundit', '>= 2.1.0'
-gem 'rack-cors', '>= 1.1.0'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.5'
+gem 'pundit', '>= 2.2.0'
+gem 'rack-cors', '>= 1.1.1'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.3'
 gem 'tod'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails', '>= 5.1.1'
+  gem 'factory_bot_rails', '>= 6.2.0'
   gem 'faker'
   gem 'hirb'
   gem 'pry-rails'
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails', '>= 5.1.2'
   gem 'figaro'
 end
 
