@@ -7,14 +7,14 @@ ruby '2.7.5'
 gem 'aws-sdk-s3', require: false
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'devise', '>= 4.7.1'
+gem 'devise', '>= 4.9.0'
 gem 'jbuilder', '~> 2.9', '>= 2.9.1'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3', '>= 4.3.12'
-gem 'pundit', '>= 2.1.0'
+gem 'pundit', '>= 2.3.0'
 gem 'rack-cors', '>= 1.1.0'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.5'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.5'
 gem 'tod'
 
 group :development, :test do
@@ -23,7 +23,7 @@ group :development, :test do
   gem 'faker'
   gem 'hirb'
   gem 'pry-rails'
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails', '>= 6.0.0'
   gem 'figaro'
 end
 
