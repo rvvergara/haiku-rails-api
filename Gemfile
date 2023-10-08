@@ -14,7 +14,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3', '>= 4.3.12'
 gem 'pundit', '>= 2.1.0'
 gem 'rack-cors', '>= 1.1.0'
-gem 'rails', '~> 6.0.3', '>= 6.0.3.5'
+gem 'rails', '~> 7.1.0'
 gem 'tod'
 
 group :development, :test do
