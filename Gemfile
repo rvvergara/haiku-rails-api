@@ -19,7 +19,7 @@ gem 'tod'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails', '>= 5.1.1'
+  gem 'factory_bot_rails', '>= 6.3.0'
   gem 'faker'
   gem 'hirb'
   gem 'pry-rails'
