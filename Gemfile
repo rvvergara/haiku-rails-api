@@ -8,7 +8,7 @@ gem 'aws-sdk-s3', require: false
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '>= 4.7.1'
-gem 'jbuilder', '~> 2.9', '>= 2.9.1'
+gem 'jbuilder', '~> 2.12', '>= 2.12.0'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3', '>= 4.3.12'
