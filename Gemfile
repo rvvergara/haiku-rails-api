@@ -23,7 +23,7 @@ group :development, :test do
   gem 'faker'
   gem 'hirb'
   gem 'pry-rails'
-  gem 'rspec-rails', '>= 3.9.0'
+  gem 'rspec-rails', '>= 8.0.0'
   gem 'figaro'
 end
 
