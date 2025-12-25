@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.5'
-gem 'aws-sdk-s3', require: false
+gem 'aws-sdk-s3', '>= 1.208.0', require: false
 gem 'bcrypt'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'devise', '>= 4.7.1'
